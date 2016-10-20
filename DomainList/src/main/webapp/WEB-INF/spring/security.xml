@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                    http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+                    http://www.springframework.org/schema/security 
+                    http://www.springframework.org/schema/security/spring-security-4.0.xsd">
+
+	<http use-expressions="true">
+		<csrf disabled="true" />
+		<intercept-url pattern="/"		access="permitAll" />
+		<intercept-url pattern="/loginpage"		access="permitAll" />
+		<intercept-url pattern="/domain/all/*"	access="permitAll" />
+		<intercept-url pattern="/loginpageFail"	access="permitAll" />
+		<intercept-url pattern="/signin"		access="permitAll" />		
+		<intercept-url pattern="/user/add"		access="permitAll" />
+		<intercept-url pattern="/*" 			access="isAuthenticated()" />
+		<intercept-url pattern="/**" 			access="isAuthenticated()" />
+		
+
+		<logout logout-url="/logout" logout-success-url="/" />
+		<!--default-target-url="/"
+					always-use-default-target = "true"-->
+		<form-login login-page="/loginpage" 
+		
+					login-processing-url="/loginprocessing" 
+					authentication-failure-url="/loginpageFail"/>
+	</http>
+	
+	<beans:bean id="encoder"
+		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></beans:bean>
+
+	<authentication-manager>
+		<authentication-provider>
+			<user-service>
+				<user name="admin" password="admin" authorities="ROLE_ADMIN" />
+			</user-service>
+		</authentication-provider>
+	
+		<authentication-provider user-service-ref="userDetailsService">
+			<password-encoder ref="encoder"></password-encoder>
+		</authentication-provider>
+	</authentication-manager>
+
+	<beans:import resource="classpath:/META-INF/applicationContext.xml" />
+</beans:beans>
