@@ -77,15 +77,7 @@ public class DomainServiceImpl implements DomainService{
 			}else{
 				domain.setStatus(false);
 			}
-			BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-			String inputLine;
-			StringBuffer response = new StringBuffer();
-			while ((inputLine = in.readLine()) != null) {
-				response.append(inputLine);
-			}
-			in.close();
-				
-			System.out.println(response.toString());
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
