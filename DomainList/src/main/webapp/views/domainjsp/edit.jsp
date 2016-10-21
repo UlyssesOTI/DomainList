@@ -2,10 +2,13 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+
 
 <div class="container">
 	<div class="jumbotron">
-	<form:form id="formAddDomain" action="update" method="put" modelAttribute="domain">
+	<form:form id="formAddDomain" action="update" method="post" modelAttribute="domain">
 	<fieldset>
 		<p>
 			<form:input path="id" type="hidden"/>
@@ -13,9 +16,7 @@
       		<form:input id="curl" type="url" path="name"/>
       		<form:input path="status" type="hidden"/>
       		<form:input path="user" type="hidden"/>
-
     	</p>
-
     	<p>
       		<input class="submit" type="submit" value="Submit">
     	</p>

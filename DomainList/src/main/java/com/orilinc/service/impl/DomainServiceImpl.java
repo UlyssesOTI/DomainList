@@ -1,7 +1,5 @@
 package com.orilinc.service.impl;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -13,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.orilinc.dao.DomainDao;
 import com.orilinc.entity.Domain;
@@ -38,6 +37,7 @@ public class DomainServiceImpl implements DomainService{
 		
 	}
 
+	@Transactional
 	public Domain getById(int id) {
 		return domainDao.findOne(id);
 	}

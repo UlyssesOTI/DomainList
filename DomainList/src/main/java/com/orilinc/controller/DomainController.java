@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
@@ -61,13 +62,14 @@ public class DomainController {
 		return "redirect:/domain/all/1";
 	}
 	
+	@Transactional
 	@RequestMapping(value="edit/{id}", method = RequestMethod.GET)
 	private String edit(@PathVariable("id") Integer id, Model model){
 		model.addAttribute("domain", domainService.getById(id));
 		return "domain-edit";
 	}
 	
-	@RequestMapping(value="update", method = RequestMethod.PUT)
+	@RequestMapping(value="update", method = RequestMethod.POST)
 	private String update(@ModelAttribute("domain") @Valid Domain domain,BindingResult result){
 		if (result.hasErrors()) {			
 			return "domain-edit";

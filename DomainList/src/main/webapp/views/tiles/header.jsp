@@ -17,6 +17,7 @@
 </head>
 <body>
 <c:url var="logout" value="/logout" />
+<c:url var="domains" value="/domain/all/1" />
 <c:url var="users" value="/user/all/1" />
 <c:url var="login" value="/loginpage" />
 <div class="container">
@@ -25,7 +26,7 @@
     <sec:authorize access="isAuthenticated()">
 		<a href="${logout}" class="btn btn-default">LogOut</a>
 	</sec:authorize>
-	
+	<a href="${domains}" class="btn btn-success">Domains</a>
 	<sec:authorize access="hasAnyRole('ROLE_ADMIN')">		
 		<a href="${users}" class="btn btn-success">All users</a>
 	</sec:authorize>
